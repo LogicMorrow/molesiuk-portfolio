@@ -98,7 +98,26 @@
     });
   }
 
-  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); }
+  /* 6) Poświata podążająca za kursorem w hero (tylko desktop, hover/pointer fine) */
+  function initHeroGlow() {
+    var hero = document.querySelector('.hero');
+    var glow = hero && hero.querySelector('.hero__glow');
+    if (!hero || !glow || reduceMotion) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    var ticking = false;
+    hero.addEventListener('pointermove', function (e) {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        var r = hero.getBoundingClientRect();
+        glow.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        glow.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
+  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); initHeroGlow(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
