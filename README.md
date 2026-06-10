@@ -1,6 +1,6 @@
 # mateusz-olesiuk-website
 
-Strona-wizytówka **Mateusza Olesiuka** — specjalisty ds. wdrożeń AI i automatyzacji w MŚP.
+Strona-wizytówka **Mateusza Olesiuka** — specjalisty ds. wdrożeń AI&nbsp;i&nbsp;automatyzacji w&nbsp;MŚP.
 Vanilla HTML/CSS/JS, jeden `index.html`, zero frameworka, zero build-stepu. Hostowana na GitHub Pages.
 
 ## Struktura
