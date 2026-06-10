@@ -1,0 +1,26 @@
+# === Agent pack + materiały robocze — PRYWATNE (NIE trafiają do publicznego repo) ===
+.claude/
+knowlage-base/
+CLAUDE.md
+.real-test-status.json
+.audit-ready-result.json
+
+# === Sekrety / env ===
+.env
+.env.*
+*.local
+secrets.json
+
+# === System / edytory ===
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+
+# === Logi / tymczasowe ===
+*.log
+node_modules/
+.cache/
