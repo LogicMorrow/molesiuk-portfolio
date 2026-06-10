@@ -13,15 +13,48 @@
       els.forEach(function (el) { el.classList.add('is-visible'); });
       return;
     }
+    // Rewersywnie: pokaż przy wjeździe w kadr, schowaj przy wyjeździe (scroll w górę).
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('is-visible');
-          io.unobserve(e.target);
-        }
+        e.target.classList.toggle('is-visible', e.isIntersecting);
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
     els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* Liczby „doliczające się" przy wjeździe w kadr (count-up) */
+  function initCountUp() {
+    var nums = document.querySelectorAll('.stat__num[data-count]');
+    if (!nums.length || reduceMotion || !('IntersectionObserver' in window)) return;
+
+    function animate(el) {
+      if (el.dataset.counting === '1') return;       // licz raz
+      el.dataset.counting = '1';
+      var raw = el.getAttribute('data-count');
+      var isRange = raw.indexOf('-') > -1;
+      var prefix = el.getAttribute('data-prefix') || '';
+      var suffix = el.getAttribute('data-suffix') || '';
+      var thousands = el.hasAttribute('data-thousands');
+      var lo = 0, hi;
+      if (isRange) { var pr = raw.split('-'); lo = parseInt(pr[0], 10); hi = parseInt(pr[1], 10); }
+      else { hi = parseInt(raw, 10); }
+      var dur = 1100, startT = null;
+      function fmt(n) { return thousands ? String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : String(n); }
+      function frame(t) {
+        if (startT === null) startT = t;
+        var prog = Math.min((t - startT) / dur, 1);
+        var eased = 1 - Math.pow(1 - prog, 3);       // easeOutCubic
+        if (isRange) el.textContent = prefix + Math.round(eased * lo) + '–' + Math.round(eased * hi) + suffix;
+        else el.textContent = prefix + fmt(Math.round(eased * hi)) + suffix;
+        if (prog < 1) window.requestAnimationFrame(frame);
+      }
+      window.requestAnimationFrame(frame);
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) animate(e.target); });
+    }, { threshold: 0.5 });
+    nums.forEach(function (el) { io.observe(el); });
   }
 
   /* 2) Sticky-nav backdrop-blur po przewinięciu */
@@ -117,7 +150,7 @@
     }, { passive: true });
   }
 
-  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); initHeroGlow(); }
+  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); initHeroGlow(); initCountUp(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
