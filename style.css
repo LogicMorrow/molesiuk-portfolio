@@ -156,13 +156,10 @@ section[id] { scroll-margin-top: 5.5rem; }
    Hero
    ===================================================================== */
 .hero {
-  padding-top: 5.5rem;
+  padding-top: 4.5rem;
   position: relative;
   overflow: clip;
   isolation: isolate;
-  min-height: clamp(600px, 88vh, 940px);
-  display: grid;
-  align-content: center;
 }
 .hero__grid { display: grid; grid-template-columns: 1.4fr .9fr; gap: 3.5rem; align-items: center; }
 .eyebrow {
