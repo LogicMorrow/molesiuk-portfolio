@@ -2,6 +2,8 @@
 .claude/
 knowlage-base/
 CLAUDE.md
+next-session.md
+next-session-*.md
 .real-test-status.json
 .audit-ready-result.json
 
