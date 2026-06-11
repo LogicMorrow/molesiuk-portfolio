@@ -295,6 +295,16 @@ section[id] { scroll-margin-top: 5.5rem; }
 .project .efekt { color: var(--accent); font-weight: 500; }
 .disclaimer { font-size: .9rem; font-style: italic; color: var(--ink-tertiary); border-left: 2px solid var(--border-strong); padding-left: 1rem; }
 
+/* ---- Wyniki (osiągnięcia z liczbami) ---- */
+.results__title { margin-top: 3.5rem; }
+.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 1.5rem; }
+@media (max-width: 980px) { .results-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .results-grid { grid-template-columns: 1fr; } }
+.result { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.5rem; }
+.result__num { font-family: var(--font-display); font-weight: 800; font-size: 1.7rem; letter-spacing: -0.02em; color: var(--accent); line-height: 1; }
+.result__desc { font-size: .9rem; color: var(--ink-secondary); margin-top: .6rem; }
+.more-projects { margin-top: 2.5rem; color: var(--ink-secondary); max-width: 62ch; }
+
 @media (max-width: 980px) {
   .step__body { grid-template-columns: 1fr; gap: 1.5rem; }
 }
