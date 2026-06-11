@@ -6,11 +6,13 @@ Vanilla HTML/CSS/JS, jeden `index.html`, zero frameworka, zero build-stepu. Host
 ## Struktura
 
 ```
-index.html   — cała strona (onepage, 6 sekcji)
-style.css    — design tokens + layout
-app.js       — scroll-reveal, sticky-nav, modal wideo
-cv-mateusz-olesiuk.pdf   — CV do pobrania (do dodania)
-assets/img/  — zdjęcia, OG image (do dodania)
+index.html              — cała strona (onepage, 7 sekcji)
+style.css               — design tokens + layout
+app.js                  — scroll-reveal, sticky-nav, modal wideo, count-up, menu
+assets/
+  ├── favicon.svg       — ikona (monogram MO)
+  ├── cv/               — CV do pobrania (cv-mateusz-olesiuk.pdf)
+  └── img/              — zdjęcia, postery wideo, OG image (1200×630)
 ```
 
 ## Podgląd lokalny
