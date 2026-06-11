@@ -150,7 +150,23 @@
     }, { passive: true });
   }
 
-  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); initHeroGlow(); initCountUp(); }
+  /* 7) Menu mobilne (hamburger) */
+  function initNavToggle() {
+    var nav = document.querySelector('header.nav');
+    var btn = nav && nav.querySelector('.nav__toggle');
+    var menu = nav && nav.querySelector('#nav-links');
+    if (!nav || !btn || !menu) return;
+    function setOpen(open) {
+      nav.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+    }
+    btn.addEventListener('click', function () { setOpen(!nav.classList.contains('open')); });
+    menu.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
+  }
+
+  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); initHeroGlow(); initCountUp(); initNavToggle(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
