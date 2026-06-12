@@ -411,16 +411,16 @@
         </dl>
       </div>
     </article>
-    <article class="proj-item" data-title="Kolejny przykład (do uzupełnienia)">
+    <article class="proj-item" data-title="Agent AI do obsługi skrzynki e-mail">
       <div class="proj-item__media">
-        <div class="proj-shot proj-shot--ph"><span>Zrzut workflow — wkrótce</span></div>
+        <div class="proj-shot"><img src="assets/img/projekty/Agent-AI-do-obsługi-poczty/01.jpg" alt="Agent AI do obsługi skrzynki e-mail — workflow w n8n" width="1920" height="1080" loading="lazy"></div>
       </div>
       <div class="proj-item__body">
-        <span class="label">Do uzupełnienia</span>
+        <span class="label">n8n&nbsp;· Claude (Haiku&nbsp;4.5 + Sonnet&nbsp;4.6)&nbsp;· HubSpot&nbsp;· Slack</span>
         <dl>
-          <div><dt>Problem</dt><dd>Tu wstawimy opis problemu, który rozwiązuje automatyzacja.</dd></div>
-          <div><dt>Rozwiązanie</dt><dd>Tu wstawimy opis tego, jak działa workflow i&nbsp;co robi.</dd></div>
-          <div><dt>Efekt</dt><dd class="efekt">Tu wstawimy mierzalny efekt.</dd></div>
+          <div><dt>Problem</dt><dd>Współdzielona skrzynka firmy z&nbsp;branży wykończenia wnętrz dostawała około 150&nbsp;maili dziennie, obsługiwanych ręcznie przez 3&nbsp;osoby. Średni czas pierwszej odpowiedzi to&nbsp;6–10&nbsp;godzin, a&nbsp;w&nbsp;poniedziałki nawet 1–2&nbsp;dni. Część zapytań ofertowych nigdy nie trafiała do&nbsp;CRM (utracona sprzedaż), a&nbsp;reklamacje były eskalowane za&nbsp;późno.</dd></div>
+          <div><dt>Rozwiązanie</dt><dd>Agent AI w&nbsp;n8n klasyfikuje każdy mail (typ, język, priorytet, nastawienie), wyciąga dane z&nbsp;zapytań ofertowych do&nbsp;HubSpot, kieruje sprawę do&nbsp;właściwej osoby z&nbsp;powiadomieniem na&nbsp;Slacku i&nbsp;natychmiast eskaluje reklamacje. Odpowiedzi powstają najpierw jako wersja robocza, którą człowiek zatwierdza przed wysyłką. Modele dobrane pod&nbsp;koszt (Claude Haiku&nbsp;4.5 do&nbsp;klasyfikacji, Sonnet&nbsp;4.6 do&nbsp;odpowiedzi), z&nbsp;zabezpieczeniami klasy produkcyjnej: fakty tylko z&nbsp;arkuszy i&nbsp;CRM (nigdy zmyślone przez model), ochrona przed prompt-injection, limit kosztów i&nbsp;ochrona przed zapętleniem maili.</dd></div>
+          <div><dt>Efekt</dt><dd class="efekt">Czas pierwszej reakcji skrócony z&nbsp;godzin do&nbsp;minut, zero ręcznego przepisywania zapytań do&nbsp;CRM i&nbsp;natychmiastowa eskalacja reklamacji, przy koszcie API rzędu kilkunastu złotych miesięcznie i&nbsp;pełnej kontroli człowieka nad&nbsp;tym, co&nbsp;wychodzi do&nbsp;klienta.</dd></div>
         </dl>
       </div>
     </article>
