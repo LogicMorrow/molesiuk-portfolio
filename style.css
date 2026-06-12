@@ -426,9 +426,9 @@ dialog.video-modal::backdrop { background: rgba(17,17,16,.85); }
   color: color-mix(in srgb, #fff 82%, transparent); font-size: .9rem; font-weight: 500; padding: 1rem;
 }
 
-dialog.proj-modal { border: none; padding: 0; background: transparent; max-width: min(95vw, 1320px); width: 100%; }
+dialog.proj-modal { border: none; padding: 0; background: transparent; max-width: min(96vw, 1600px); width: 100%; }
 dialog.proj-modal::backdrop { background: rgba(17,17,16,.85); }
-.proj-modal__shell { background: var(--surface); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; max-height: 90vh; }
+.proj-modal__shell { background: var(--surface); border-radius: var(--radius-card); overflow: hidden; display: flex; flex-direction: column; max-height: 94vh; }
 
 .proj-modal__head { display: flex; align-items: center; gap: 1rem; padding: .7rem .7rem .7rem 1.25rem; border-bottom: 1px solid var(--border); }
 .proj-tabs { display: flex; gap: .5rem; overflow-x: auto; flex: 1; padding-bottom: .2rem; scrollbar-width: thin; }
@@ -444,7 +444,7 @@ dialog.proj-modal::backdrop { background: rgba(17,17,16,.85); }
 .proj-modal__body { display: grid; grid-template-columns: 1.1fr .9fr; overflow: hidden; min-height: 0; }
 
 /* Karuzela */
-.proj-carousel { position: relative; overflow: hidden; background: #000; min-height: 400px; }
+.proj-carousel { position: relative; overflow: hidden; background: #000; min-height: 520px; }
 .proj-carousel__track { display: flex; height: 100%; transition: transform .4s var(--ease-out); }
 .proj-carousel__track > * { flex: 0 0 100%; min-width: 100%; }
 .proj-carousel__track .proj-shot { aspect-ratio: auto; height: 100%; }
