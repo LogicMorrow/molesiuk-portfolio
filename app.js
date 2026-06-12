@@ -104,6 +104,113 @@
     dialog.addEventListener('cancel', function () { frame.innerHTML = ''; }); // Esc
   }
 
+  /* 3b) Modal galerii projektów — zakładki projektów + karuzela zdjęć */
+  function initProjectModal() {
+    var dialog = document.querySelector('dialog.proj-modal');
+    if (!dialog) return;
+    var tabsEl = dialog.querySelector('.proj-tabs');
+    var carousel = dialog.querySelector('.proj-carousel');
+    var track = dialog.querySelector('.proj-carousel__track');
+    var dotsEl = dialog.querySelector('.proj-carousel__dots');
+    var prevBtn = dialog.querySelector('.proj-carousel__nav--prev');
+    var nextBtn = dialog.querySelector('.proj-carousel__nav--next');
+    var detail = dialog.querySelector('.proj-detail');
+    var lastTrigger = null;
+    var slideIndex = 0, slideCount = 0;
+
+    function updateCarousel() {
+      track.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+      var dots = dotsEl.querySelectorAll('button');
+      dots.forEach(function (d, i) { d.setAttribute('aria-current', i === slideIndex ? 'true' : 'false'); });
+      var single = slideCount <= 1;
+      prevBtn.hidden = single; nextBtn.hidden = single;
+    }
+    function goTo(i) {
+      if (slideCount === 0) return;
+      slideIndex = (i + slideCount) % slideCount;   // zawijanie
+      updateCarousel();
+    }
+
+    function selectProject(item, allTabs, idx) {
+      allTabs.forEach(function (t, i) { t.setAttribute('aria-selected', i === idx ? 'true' : 'false'); });
+      // Slajdy z .proj-item__media
+      track.innerHTML = '';
+      var media = item.querySelector('.proj-item__media');
+      var nodes = media ? media.children : [];
+      slideCount = nodes.length;
+      Array.prototype.forEach.call(nodes, function (n) { track.appendChild(n.cloneNode(true)); });
+      // Kropki
+      dotsEl.innerHTML = '';
+      if (slideCount > 1) {
+        for (var k = 0; k < slideCount; k++) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Zdjęcie ' + (k + 1));
+          (function (ki) { b.addEventListener('click', function () { goTo(ki); }); })(k);
+          dotsEl.appendChild(b);
+        }
+      }
+      // Opis
+      var body = item.querySelector('.proj-item__body');
+      detail.innerHTML = body ? body.innerHTML : '';
+      detail.scrollTop = 0;
+      slideIndex = 0;
+      updateCarousel();
+    }
+
+    function open(dataId, trigger) {
+      var data = document.getElementById(dataId);
+      if (!data) return;
+      var items = data.querySelectorAll('.proj-item');
+      if (!items.length) return;
+      lastTrigger = trigger || null;
+      tabsEl.innerHTML = '';
+      var tabBtns = [];
+      items.forEach(function (item, i) {
+        var t = document.createElement('button');
+        t.type = 'button';
+        t.className = 'proj-tab';
+        t.setAttribute('role', 'tab');
+        t.textContent = item.getAttribute('data-title') || ('Projekt ' + (i + 1));
+        t.addEventListener('click', function () { selectProject(item, tabBtns, i); tabsEl.children[i].scrollIntoView({ block: 'nearest', inline: 'nearest' }); });
+        tabsEl.appendChild(t);
+        tabBtns.push(t);
+      });
+      selectProject(items[0], tabBtns, 0);
+      document.body.style.overflow = 'hidden';
+      if (typeof dialog.showModal === 'function') dialog.showModal();
+      else dialog.setAttribute('open', '');
+    }
+    function close() {
+      document.body.style.overflow = '';
+      if (typeof dialog.close === 'function') dialog.close();
+      else dialog.removeAttribute('open');
+      if (lastTrigger && typeof lastTrigger.focus === 'function') lastTrigger.focus();
+    }
+
+    document.querySelectorAll('.proj-open').forEach(function (btn) {
+      btn.addEventListener('click', function () { open(btn.dataset.projects, btn); });
+    });
+    prevBtn.addEventListener('click', function () { goTo(slideIndex - 1); });
+    nextBtn.addEventListener('click', function () { goTo(slideIndex + 1); });
+    dialog.querySelectorAll('[data-close]').forEach(function (b) { b.addEventListener('click', close); });
+    dialog.addEventListener('click', function (e) { if (e.target === dialog) close(); });
+    dialog.addEventListener('cancel', function () { document.body.style.overflow = ''; }); // Esc
+    dialog.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(slideIndex - 1); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); goTo(slideIndex + 1); }
+    });
+    // Swipe na dotyku
+    var startX = null;
+    carousel.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) goTo(slideIndex + (dx < 0 ? 1 : -1));
+      startX = null;
+    }, { passive: true });
+  }
+
   /* 4) Rok w stopce */
   function initYear() {
     var y = document.getElementById('year');
@@ -166,7 +273,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
   }
 
-  function init() { initReveal(); initNavBlur(); initVideoModal(); initYear(); initForm(); initHeroGlow(); initCountUp(); initNavToggle(); }
+  function init() { initReveal(); initNavBlur(); initVideoModal(); initProjectModal(); initYear(); initForm(); initHeroGlow(); initCountUp(); initNavToggle(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
