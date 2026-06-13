@@ -424,6 +424,19 @@
         </dl>
       </div>
     </article>
+    <article class="proj-item" data-title="Automatyzacja przechwytywania leadów">
+      <div class="proj-item__media">
+        <div class="proj-shot"><img src="assets/img/projekty/Automatyzacja-przechwytywania-leadów/01.jpg" alt="Automatyzacja przechwytywania leadów — scenariusz w Make.com" width="1920" height="1080" loading="lazy"></div>
+      </div>
+      <div class="proj-item__body">
+        <span class="label">Make.com&nbsp;· Webhook&nbsp;· Google&nbsp;Sheets&nbsp;· Slack</span>
+        <dl>
+          <div><dt>Problem</dt><dd>Firma zbierała leady przez formularz na&nbsp;stronie, ale wiadomości ginęły w&nbsp;skrzynce. Klient nie dostawał natychmiastowego potwierdzenia i&nbsp;odchodził do&nbsp;konkurencji, a&nbsp;zespół dowiadywał się o&nbsp;nowym kontakcie z&nbsp;opóźnieniem. Wszystko obsługiwane ręcznie, bez żadnego rejestru zgłoszeń.</dd></div>
+          <div><dt>Rozwiązanie</dt><dd>Scenariusz w&nbsp;Make.com bez jednej linijki kodu: formularz&nbsp;→ webhook&nbsp;→ zapis leada do&nbsp;Google&nbsp;Sheets&nbsp;→ automatyczne potwierdzenie e-mail do&nbsp;klienta&nbsp;→ powiadomienie zespołu na&nbsp;Slacku. Z&nbsp;wbudowaną odpornością: filtr anti-spam z&nbsp;honeypotem, zapis leada jako pierwszy nieutracalny krok, obsługa błędów (ponowienie + alert), tak że awaria powiadomienia nie cofa zapisu, oraz klucz idempotencji chroniący przed duplikatami. Scenariusz wdrożony na&nbsp;żywo przez API, z&nbsp;połączeniami i&nbsp;sekretami konfigurowanymi po&nbsp;stronie panelu, bez żadnych kluczy w&nbsp;samym przepływie.</dd></div>
+          <div><dt>Efekt</dt><dd class="efekt">Czas od&nbsp;wysłania formularza do&nbsp;potwierdzenia i&nbsp;powiadomienia zespołu skrócony z&nbsp;godzin do&nbsp;sekund, zero zgubionych leadów i&nbsp;ręcznego przepisywania, przy koszcie 0&nbsp;zł i&nbsp;zerowym utrzymaniu, na&nbsp;narzędziu dobranym do&nbsp;skali firmy.</dd></div>
+        </dl>
+      </div>
+    </article>
   </div>
 
   <!-- Aplikacje AI (3). Każdy .proj-item: data-title + .proj-item__media (kilka zrzutów) + .proj-item__body (Problem/Rozwiązanie/Funkcje). -->
