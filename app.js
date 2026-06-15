@@ -109,6 +109,7 @@
     var dialog = document.querySelector('dialog.proj-modal');
     if (!dialog) return;
     var tabsEl = dialog.querySelector('.proj-tabs');
+    var selectEl = dialog.querySelector('.proj-select');
     var carousel = dialog.querySelector('.proj-carousel');
     var track = dialog.querySelector('.proj-carousel__track');
     var dotsEl = dialog.querySelector('.proj-carousel__dots');
@@ -133,6 +134,7 @@
 
     function selectProject(item, allTabs, idx) {
       allTabs.forEach(function (t, i) { t.setAttribute('aria-selected', i === idx ? 'true' : 'false'); });
+      if (selectEl) selectEl.value = String(idx);   // sync listy rozwijanej (mobile)
       // Slajdy z .proj-item__media
       track.innerHTML = '';
       var media = item.querySelector('.proj-item__media');
@@ -176,6 +178,22 @@
         tabsEl.appendChild(t);
         tabBtns.push(t);
       });
+      // Lista rozwijana (mobile) — ten sam zestaw projektów, z licznikiem „i/N"
+      if (selectEl) {
+        selectEl.innerHTML = '';
+        var total = items.length;
+        items.forEach(function (item, i) {
+          var o = document.createElement('option');
+          o.value = String(i);
+          var title = item.getAttribute('data-title') || ('Projekt ' + (i + 1));
+          o.textContent = (total > 1 ? (i + 1) + '/' + total + ' · ' : '') + title;
+          selectEl.appendChild(o);
+        });
+        selectEl.onchange = function () {
+          var i = parseInt(selectEl.value, 10) || 0;
+          selectProject(items[i], tabBtns, i);
+        };
+      }
       selectProject(items[0], tabBtns, 0);
       document.body.style.overflow = 'hidden';
       if (typeof dialog.showModal === 'function') dialog.showModal();
