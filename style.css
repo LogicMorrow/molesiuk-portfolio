@@ -380,6 +380,32 @@ footer.site-footer {
 .footer__inner a:hover { color: var(--ink); }
 
 /* =====================================================================
+   Strony prawne (polityka prywatności itp.)
+   ===================================================================== */
+.legal { padding: calc(var(--section-pad-y) - 1rem) var(--section-pad-x); }
+.legal__inner { max-width: 760px; }
+.legal h1 { font-size: clamp(2.25rem, 5vw, 3.25rem); margin-bottom: 1rem; }
+.legal h2 {
+  font-size: clamp(1.4rem, 3vw, 1.75rem);
+  margin: 3rem 0 1rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border);
+}
+.legal h3 { font-size: 1.15rem; margin: 1.75rem 0 .75rem; color: var(--accent); }
+.legal p, .legal li { color: var(--ink-secondary); }
+.legal .lead { margin-bottom: 1rem; }
+.legal ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+.legal li { margin-bottom: .5rem; }
+.legal a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+.legal a:hover { color: var(--accent-light); }
+.legal strong { color: var(--ink); font-weight: 600; }
+.legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .9em; background: var(--accent-muted);
+  padding: .1em .4em; border-radius: 6px; color: var(--accent);
+}
+
+/* =====================================================================
    Scroll-reveal
    ===================================================================== */
 .reveal { opacity: 0; transform: translateY(24px); filter: blur(6px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out), filter .8s var(--ease-out); }
