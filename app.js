@@ -217,28 +217,7 @@
     if (y) y.textContent = String(new Date().getFullYear());
   }
 
-  /* 5) Formularz — dopóki action="" (niepodłączony), nie wysyłaj pustego POST */
-  function initForm() {
-    var form = document.querySelector('.contact__form');
-    if (!form) return;
-    form.addEventListener('submit', function (e) {
-      var action = (form.getAttribute('action') || '').trim();
-      if (!action) {
-        e.preventDefault();
-        if (!form.reportValidity()) return;
-        var existing = form.querySelector('.form-status');
-        if (!existing) {
-          var msg = document.createElement('p');
-          msg.className = 'form-note form-status';
-          msg.setAttribute('role', 'status');
-          msg.textContent = 'Formularz nie jest jeszcze podłączony — napisz na olesiuk13@gmail.com.';
-          form.appendChild(msg);
-        }
-      }
-    });
-  }
-
-  /* 6) Poświata podążająca za kursorem w hero (tylko desktop, hover/pointer fine) */
+  /* 5) Poświata podążająca za kursorem w hero (tylko desktop, hover/pointer fine) */
   function initHeroGlow() {
     var hero = document.querySelector('.hero');
     var glow = hero && hero.querySelector('.hero__glow');
@@ -257,7 +236,7 @@
     }, { passive: true });
   }
 
-  /* 7) Menu mobilne (hamburger) */
+  /* 6) Menu mobilne (hamburger) */
   function initNavToggle() {
     var nav = document.querySelector('header.nav');
     var btn = nav && nav.querySelector('.nav__toggle');
@@ -273,7 +252,7 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setOpen(false); });
   }
 
-  function init() { initReveal(); initNavBlur(); initVideoModal(); initProjectModal(); initYear(); initForm(); initHeroGlow(); initCountUp(); initNavToggle(); }
+  function init() { initReveal(); initNavBlur(); initVideoModal(); initProjectModal(); initYear(); initHeroGlow(); initCountUp(); initNavToggle(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
 })();
